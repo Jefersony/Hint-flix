@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FilmeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get( '/cadastrar-filme', function(){
+    return view('cadastro-filme');
+})->middleware(['auth', 'verified'])->name('cadastrar-filme');
+
+Route::post('/novo-filme-cadastrar', [FilmeController::class, 'store'])
+    ->middleware(['auth', 'verified'])->name('novo-filme-cadastrar');
 
 require __DIR__.'/auth.php';
