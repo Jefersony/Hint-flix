@@ -6,23 +6,42 @@ use App\Models\Filme;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class FilmeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getFilmes( Request $request ): View
     {
-        //
+        $titulo = $request->input('titulo');
+        $anoInicial = $request->input('anoInicial');
+        $anoFinal = $request->input('anoFinal');
+        $genero = $request->input('genero');
+        $estudio = $request->input('estudio');
+        $diretor = $request->input('diretor');
+        $comandoSQL = "select * from filmes where " . 
+            "titulo = '"        . $titulo       . "' or " .
+            "anoLancamento = "  . (string) $anoInicial   . " or "  .
+            "genero = '"        . $genero       . "' or " .
+            "diretor = '"       . $diretor      . "' or " .
+            "estudio = '"       . $estudio      . "'"
+        ;
+        $filmes = DB::select($comandoSQL);
+        return view('dashboard', ['filmes' => $filmes] );
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Abre a página do formulário para a busca de filmes.
      */
-    public function create()
+    public function exibirFormulario(): View
     {
-        //
+        // Conjunto vazio de filmes para ser passado ao template
+        // e evitar uma NullException
+        $filmes = DB::select("select * from filmes where titulo = 'NENHUM'");
+        return view('dashboard', ['filmes' => $filmes ]);
     }
 
     /**
