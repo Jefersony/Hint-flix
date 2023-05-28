@@ -22,15 +22,20 @@ class FilmeController extends Controller
         $genero = $request->input('genero');
         $estudio = $request->input('estudio');
         $diretor = $request->input('diretor');
+        $elenco = $request->input('elenco');
+        if ( $anoInicial == '' ){
+            $anoInicial = 0;
+        }
         $comandoSQL = "select * from filmes where " . 
             "titulo = '"        . $titulo       . "' or " .
             "anoLancamento = "  . (string) $anoInicial   . " or "  .
             "genero = '"        . $genero       . "' or " .
             "diretor = '"       . $diretor      . "' or " .
-            "estudio = '"       . $estudio      . "'"
+            "estudio = '"       . $estudio      . "' or " .
+            "elenco = '"        . $elenco       . "'"
         ;
         $filmes = DB::select($comandoSQL);
-        return view('dashboard', ['filmes' => $filmes] );
+        return view('sugestoes', ['filmes' => $filmes] );
     }
 
     /**

@@ -38,23 +38,6 @@
                                 class="mt-2" />
                             <x-primary-button class="mt-4">{{ __('Buscar') }} </x-primary-button>
                         </form>
-                        <br>
-                        <p>Lista de Filmes</p>
-                        <div id="listaFilmes">
-                            <ul>
-                            @foreach ($filmes as $flm)
-                                <li>
-                                    <label>Título: </label>{{ $flm->titulo }} <br>
-                                    <label>Ano de lançamento: </label>{{ $flm->anoLancamento }} <br>
-                                    <label>Genero: </label>{{ $flm->genero }} <br>
-                                    <label>Diretor: </label>{{ $flm->diretor }} <br>
-                                    <label>Estúdio: </label>{{ $flm->estudio }} <br>
-                                    <label>Elenco: </label><p>Nomes dos atores </p> <br>
-                                </li>
-                                <br>
-                            @endforeach
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
