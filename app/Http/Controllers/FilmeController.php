@@ -8,33 +8,75 @@ use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Validation\Rules;
 
 class FilmeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Retorna uma página com sugestões de filmes
      */
     public function getFilmes( Request $request ): View
     {
         $titulo = $request->input('titulo');
-        $anoInicial = $request->input('anoInicial');
-        $anoFinal = $request->input('anoFinal');
         $genero = $request->input('genero');
         $estudio = $request->input('estudio');
         $diretor = $request->input('diretor');
         $elenco = $request->input('elenco');
-        if ( $anoInicial == '' ){
-            $anoInicial = 0;
+        $anoInicial = $request->input('anoInicial');
+        $anoFinal = $request->input('anoFinal');
+
+        // Verifica se apenas um dos campos relacionados ao 
+        // intervalo de busca para ano de lançamento está preenchido
+        // ------------------------------------------------(
+        if ( $anoInicial == '' and $anoFinal != '' ){
+            $verificacao = $request->validate([
+                'anoInicial' => ["required"],
+            ]);
+            return view('sugestoes', [$verificacao]);
         }
-        $comandoSQL = "select * from filmes where " . 
-            "titulo = '"        . $titulo       . "' or " .
-            "anoLancamento = "  . (string) $anoInicial   . " or "  .
-            "genero = '"        . $genero       . "' or " .
-            "diretor = '"       . $diretor      . "' or " .
-            "estudio = '"       . $estudio      . "' or " .
-            "elenco = '"        . $elenco       . "'"
-        ;
-        $filmes = DB::select($comandoSQL);
+        if ( $anoInicial != '' and $anoFinal == '' ){
+            $verificacao = $request->validate([
+                'anoFinal' => ["required"],
+            ]);
+            return view('sugestoes', [$verificacao]);
+        } // ------------------------- ) Fim da verificação 
+
+        $filmes;
+
+        // Se os dois campos relacionados ao ano estiverem preenchidos, eles 
+        // devem ter valores numéricos e inteiros para serem usados no comando SQL
+        if ( $anoInicial != '' and $anoFinal != '' ){
+            $request->validate([
+                'anoInicial' => ["integer"],
+                'anoFinal' => ["integer"],
+            ]);
+            $comandoSQL = "select * from filmes where "                 . 
+                "titulo = '"         . $titulo              . "' or "   .
+                "genero = '"         . $genero              . "' or "   .
+                "diretor = '"        . $diretor             . "' or "   .
+                "estudio = '"        . $estudio             . "' or "   .
+                "elenco = '"         . $elenco              . "' or "   .
+                "anoLancamento >= "  . (string) $anoInicial . " and "   .
+                "anoLancamento <= "  . (string) $anoFinal
+            ; // Fecha a string de comando SQL
+            
+            $filmes = DB::select( $comandoSQL );
+
+        // Esse é o caso em que os dois campos relativos ao ano de lançamento estão vazios
+        }else{
+            $anoInicial = 0;
+            $anoFinal = 0;
+            $comandoSQL = "select * from filmes where " . 
+                "titulo = '"        . $titulo       . "' or " .
+                "genero = '"        . $genero       . "' or " .
+                "diretor = '"       . $diretor      . "' or " .
+                "estudio = '"       . $estudio      . "' or " .
+                "elenco = '"        . $elenco       . "'"
+            ; // Fecha string do comando SQL
+
+            $filmes = DB::select($comandoSQL);
+        }
+
         return view('sugestoes', ['filmes' => $filmes] );
     }
 
