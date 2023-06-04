@@ -59,7 +59,7 @@ class FilmeController extends Controller
                 "anoLancamento >= "  . (string) $anoInicial . " and "   .
                 "anoLancamento <= "  . (string) $anoFinal
             ; // Fecha a string de comando SQL
-            
+
             $filmes = DB::select( $comandoSQL );
 
         // Esse é o caso em que os dois campos relativos ao ano de lançamento estão vazios
@@ -97,6 +97,14 @@ class FilmeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'titulo'        => ['required'],
+            'anoLancamento' => ['required', 'integer'],
+            'genero'        => ['required'],
+            'estudio'       => ['required'],
+            'diretor'       => ['required'],
+            'elenco'        => ['required'],
+        ]);
         $filme = new Filme();
         $filme->titulo = $request->input('titulo');
         $filme->anoLancamento = $request->input('anoLancamento');
