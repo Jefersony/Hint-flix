@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.navbar a {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+}
+
+.button button {
+    border-radius: 25px !important;
+    background-color: #6A5ACD;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+.button-canva {
+    margin-right: 10px;
+}
+
+.bg-image {
+    height: 100vh;
+    background-image: url('../assets/disney2.jpg');
+    background-size: cover;
+}
+
+#home-page h2 {
+    font-size: 3.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #6A5ACD;
+}
+#home-page span {
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+}
+

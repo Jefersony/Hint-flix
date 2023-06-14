@@ -1,0 +1,223 @@
+nav {
+    background-color: #000 !important;
+}
+
+nav .navbar-brand {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFF;
+}
+nav .navbar-toggler {
+    background-color: #FFF;
+}
+nav .navbar-toggler:focus {
+    box-shadow: none;
+    border: 1px solid #000;
+}
+
+.navbar-collapse.show {
+    height: 400px;
+    margin-top: 15px;
+    /*  realizar melhorias */
+}
+
+/* sessão principal Main */
+
+main {
+    background-color: #000;
+}
+/* Container-Slide */
+
+.container-slides {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: auto;
+}
+.slide-container .slide {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px 9%;
+    padding-bottom: 70px;
+    border-radius: 40px;
+}
+.slide-container .slide .content {
+    flex: 1 1 350px;
+    height: 600px;
+    position: relative;
+}
+.slide-container .slide .content .btn-details {
+    display: inline-block;
+    background-color: #FFF;
+    color: #000;
+    font-weight: 500;
+    font-size: 1.5rem;
+    padding: 10px 40px;
+    border-radius: 20px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 120px;
+    transition: transform 0.3s ease;
+}
+.slide-container .slide .content .btn-details:hover {
+    transform: scale(1.1);
+}
+
+.container-slides .slide-container {
+    display: none;
+}
+.container-slides .active {
+    display: block;
+}
+
+.slide-container:nth-child(1) .slide {
+    background: url(/img/teste/parqueterror.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+.slide-container:nth-child(2) .slide {
+    background: url(/img/teste/podcast-filme-super-mario-brosjpg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+.slide-container:nth-child(3) .slide {
+    background: url(/img/teste/harry-potter-ranking-filmes-capa.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+.slide-container:nth-child(4) .slide {
+    background: url(/img/teste/the-walking-dead-11-season.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+
+.container-slides #back,
+.container-slides #next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFF;
+    font-weight: bold;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    font-size: 3rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50px;
+    border: none;
+}
+.container-slides #back:hover,
+.container-slides #next:hover {
+    transition: .2s ease-in-out;
+    font-size: 4rem;
+}
+
+.container-slides #back {
+    left: 20px;
+}
+.container-slides #next {
+    right: 20px;
+}
+
+
+
+/* Carousel-Films */
+
+.carousels-films {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background: #000;
+    overflow: hidden;
+}
+
+.carousels-films h3 {
+    color: #FFF;
+    margin-left: 50px;
+}
+
+#container-films {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    display: inline-flex;
+    transition: 0.6s ease-in-out;
+}
+#container-films #item {
+    position: relative;
+    margin: 0 20px;
+    width: 350px;
+    height: 200px;
+    z-index: 2;
+} 
+#container-films #item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+#btn-left {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 3;
+    border: none;
+    background: transparent;
+    font-size: 3rem;
+    color: #FFF;
+    font-weight: bold;
+    line-height: 25px;
+}
+#btn-right {
+    position: absolute;
+    top: 45%;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 3;
+    border: none;
+    background: transparent;
+    font-size: 3rem;
+    color: #FFF;
+    font-weight: bold;
+    line-height: 25px;
+}
+#btn-left:hover,
+#btn-right:hover {
+    font-size: 4rem;
+    transition: 0.2s ease-in-out;
+}
+
+#container-films #limiter {
+    position: absolute;
+    margin: 0 10px;
+    width: 350px;
+    height: 250px;
+    z-index: 1;
+    right: 0;
+    opacity: 0;
+    background-color: blue;
+}
+
+.teste {
+    height: 100vh;
+    background-color: #000;
+}
